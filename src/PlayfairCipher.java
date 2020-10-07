@@ -42,6 +42,7 @@ public class PlayfairCipher {
     String alphabet= "ABCDEFGHIKLMNOPQRSTUVWXYZ";
     public PlayfairCipher(String input){
         message = input.toUpperCase();
+        message = message.trim();
         if (message.length()/2!=0)
             message=message.concat("X");
         key = new String[5][5];
@@ -49,6 +50,7 @@ public class PlayfairCipher {
     }
     public PlayfairCipher(String input, String keyfob){
         message = input.toUpperCase();
+        message = message.trim();
         if (message.length()/2!=0)
             message=message.concat("X");
         key = new String[5][5];
@@ -107,7 +109,7 @@ public class PlayfairCipher {
                 pair = pair.substring(0,1);
                 pair = pair.concat("X");
             }
-            System.out.println("pair is: " + pair);
+            //System.out.println("pair is: " + pair);
             pairs.enqueue(pair);
         }
         return pairs;
@@ -260,14 +262,14 @@ public class PlayfairCipher {
         while (!encrypted_pairs.isEmpty()){
             pair= encrypted_pairs.dequeue();
             if (pair.charAt(0)=='X') {
-                System.out.println("pair before mod is: " + pair);
+                //System.out.println("pair before mod is: " + pair);
                 pair = pair.substring(1, 2);
-                System.out.println("pair after mod is: " + pair);
+                //System.out.println("pair after mod is: " + pair);
             }
             else if (pair.charAt(1)=='X') {
-                System.out.println("pair before mod is: " + pair);
+                //System.out.println("pair before mod is: " + pair);
                 pair = pair.substring(0, 1);
-                System.out.println("pair after mod is: " + pair);
+                //System.out.println("pair after mod is: " + pair);
             }
             put_it_all_together = put_it_all_together.concat(pair);
         }
@@ -288,19 +290,24 @@ public class PlayfairCipher {
             }
         }else {
             PlayfairCipher t1 = new PlayfairCipher("ABCDEFGHIJ");
-            System.out.println(t1.message);
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 5; j++) {
-                    System.out.print("[" + t1.key[i][j] + "]");
-                }
-                System.out.println();
-            }
+            System.out.println("Personal Test Case 1");
             t1.encrypt();
             t1.decrypt();
-
+            System.out.println();
+            System.out.println("Given test case 1");
             PlayfairCipher test1 = new PlayfairCipher("WHITEHAT", "PLAYFIREXMBCDGHKNOQSTUVWZ");
             test1.encrypt();
             test1.decrypt();
+            System.out.println();
+            System.out.println("Given Test Case 2");
+            PlayfairCipher test2 = new PlayfairCipher("AGOODFOODBOOKISACOOKBOOK", "PLAYFIREXMBCDGHKNOQSTUVWZ");
+            test2.encrypt();
+            test2.decrypt();
+            System.out.println();
+            System.out.println("Given Test Case 3");
+            PlayfairCipher test3 = new PlayfairCipher("TODAYISAGOODDAYTODIE", "OZAKDIREXMBCVGHYNPQSTUFWL");
+            test3.encrypt();
+            test3.decrypt();
         }
     }
 }
