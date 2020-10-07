@@ -277,19 +277,27 @@ public class PlayfairCipher {
         return put_it_all_together;
     }
     public static void main(String[] args) {
-        PlayfairCipher t1 = new PlayfairCipher("ABCDEFGHIJ");
-        System.out.println(t1.message);
-        for (int i =0; i<5; i++){
-            for (int j=0; j<5; j++){
-                System.out.print("[" + t1.key[i][j] + "]");
+        if (args[0].compareTo("encode") == 0) {
+            PlayfairCipher in = new PlayfairCipher(args[1], args[2]);
+            in.encrypt();
+        } else if (args[0].compareTo("decode") == 0) {
+            PlayfairCipher in = new PlayfairCipher(args[1], args[2]);
+            in.decrypt();
+        } else {
+            PlayfairCipher t1 = new PlayfairCipher("ABCDEFGHIJ");
+            System.out.println(t1.message);
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    System.out.print("[" + t1.key[i][j] + "]");
+                }
+                System.out.println();
             }
-            System.out.println();
-        }
-        t1.encrypt();
-        t1.decrypt();
+            t1.encrypt();
+            t1.decrypt();
 
-        PlayfairCipher test1 = new PlayfairCipher("WHITEHAT", "PLAYFIREXMBCDGHKNOQSTUVWZ");
-        test1.encrypt();
-        test1.decrypt();
+            PlayfairCipher test1 = new PlayfairCipher("WHITEHAT", "PLAYFIREXMBCDGHKNOQSTUVWZ");
+            test1.encrypt();
+            test1.decrypt();
+        }
     }
 }
